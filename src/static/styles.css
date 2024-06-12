@@ -1,5 +1,15 @@
 /* styles.css */
 
+body {
+    background: #888888;
+}
+
+.card-link {
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+}
+
 .card {
     position: relative;
     border: 1px solid #ccc;
@@ -9,7 +19,7 @@
     margin: 20px;
     padding: 15px;
     box-shadow: 2px 2px 12px #aaa;
-    background-size: contain;
+    background-size: cover;
     background: crimson center;
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
@@ -29,10 +39,15 @@
     max-height: 100%;
 }
 
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.card-content {
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    right: 15px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .card-name {
@@ -42,4 +57,17 @@
 
 .card-role {
     font-weight: bold;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media (max-width: 600px) {
+    .card {
+        width: 90%;
+        height: auto;
+    }
 }
