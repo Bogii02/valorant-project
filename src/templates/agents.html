@@ -10,11 +10,15 @@
     <h1>Agents</h1>
     <div class="container">
         {% for agent in agents %}
-        <div class="card" style="background-image: url('{{ agent[4] }}');">
-            <img class="agent-image" src="{{ agent[3] }}" alt="Image of {{ agent[1] }}">
-            <h2 class="card-name">{{ agent[1] }}</h2>
-            <p class="card-role">{{ agent[5] }}</p>
-        </div>
+        <a href="{{ url_for('agent_details_route', agent_name=agent[1]) }}" class="card-link">
+            <div class="card" style="background-image: url('{{ agent[4] }}');">
+                <img class="agent-image" src="{{ agent[3] }}" alt="Image of {{ agent[1] }}">
+                <div class="card-content">
+                    <h2 class="card-name">{{ agent[1] }}</h2>
+                    <p class="card-role">{{ agent[5] }}</p>
+                </div>
+            </div>
+        </a>
         {% endfor %}
     </div>
 </body>
