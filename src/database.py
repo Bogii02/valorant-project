@@ -17,7 +17,7 @@ def create_connection_string():
     if not env_variables:
         raise KeyError('One of the required variables are missing')
 
-    connection_string = f"postgresql://{db_user_name}:{db_password}@localhost:{db_port}/{db_database_name}"
+    connection_string = f"postgresql://{db_user_name}:{db_password}@database:{db_port}/{db_database_name}"
 
     return connection_string
 
