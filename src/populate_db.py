@@ -37,11 +37,11 @@ def save_agents(agents_data):
     for agent_data in agents_data:
         name, description, role, agent_image, background_image, abilities = agent_data
         try:
-            agent_id = data_manager.save_agent(name, description, agent_image, background_image, role)
+            agent_name = data_manager.save_agent(name, description, agent_image, background_image, role)
 
             for ability_data in abilities:
                 ability_name, ability_description, ability_image = ability_data
-                data_manager.save_ability(ability_name, ability_description, ability_image, agent_id)
+                data_manager.save_ability(ability_name, ability_description, ability_image, agent_name)
 
         except Exception as e:
             print(f"Error saving agent or abilities: {e}")
