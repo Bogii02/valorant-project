@@ -16,7 +16,7 @@ def agents_route():
 def agent_details_route(agent_name):
     agent = data_manager.get_agent_by_name(agent_name)
     abilities = data_manager.get_abilities_by_agent(agent_name)
-    return render_template('agent_detail.html', agent=agent, abilities=abilities)
+    return render_template('agent_details.html', agent=agent, abilities=abilities)
 
 
 if __name__ == '__main__':

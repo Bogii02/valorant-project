@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='agent_details.css') }}">
+</head>
+<body>
+<h1>Agent Details</h1>
+<div class="container">
+    <div class="agent-card" style="background-image: url('{{ agent[0][4] }}');">
+        <img class="agent-image" src="{{ agent[0][3] }}" alt="Image of {{ agent[0][1] }}">
+        <div class="card-content">
+            <h2 class="agent-name">{{ agent[0][1] }}</h2>
+            <p class="agent-role">{{ agent[0][5] }}</p>
+        </div>
+    </div>
+    <div class="abilities-container">
+        {% for ability in abilities %}
+        <div class="ability-card">
+            <img class="ability-image" src="{{ ability[2] }}" alt="Image of {{ ability[0] }}">
+            <div class="card-content">
+                <h2 class="ability-name">{{ ability[0] }}</h2>
+                <p class="ability-description">{{ ability[1] }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>
