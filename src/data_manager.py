@@ -42,15 +42,15 @@ def get_all_agents(cursor):
 
 
 @connection_handler
-def get_one_agent(cursor, agent_name):
+def get_agent_by_name(cursor, agent_name):
     query = """
         SELECT * FROM agent
-        WHERE agent_name = %(agent_name)s
+        WHERE name = %(agent_name)s
         """
     cursor.execute(query, {
         'agent_name': agent_name
     })
-    return cursor.fetchall
+    return cursor.fetchall()
 
 
 @connection_handler
@@ -60,5 +60,7 @@ def get_abilities_by_agent(cursor, agent_name):
         FROM ability
         WHERE agent_name = %(agent_name)s
         """
-    cursor.execute(query, {'agent_name': agent_name})
+    cursor.execute(query, {
+        'agent_name': agent_name
+    })
     return cursor.fetchall()
