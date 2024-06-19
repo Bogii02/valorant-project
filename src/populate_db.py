@@ -1,11 +1,14 @@
 import requests
-
 import data_manager
 
 AGENT_URL = "https://valorant-api.com/v1/agents"
 
 response = requests.get(AGENT_URL)
 data = response.json()
+
+
+def encode_agent_name_for_url(agent_name):
+    return agent_name.replace('/', '')
 
 
 def get_agents():
@@ -38,6 +41,7 @@ def save_agents(agents_data):
     for agent_data in agents_data:
         name, description, role, agent_image, background_image, abilities = agent_data
         try:
+            name = encode_agent_name_for_url(name)
             agent_name = data_manager.save_agent(name, description, agent_image, background_image, role)
 
             for ability_data in abilities:
