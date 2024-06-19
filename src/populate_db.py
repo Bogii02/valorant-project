@@ -21,10 +21,11 @@ def get_agents():
 
                 abilities = []
                 for ability in agent.get('abilities', []):
-                    ability_name = ability['displayName']
-                    ability_description = ability['description']
-                    ability_image = ability['displayIcon']
-                    abilities.append((ability_name, ability_description, ability_image))
+                    if ability['displayIcon'] is not None:
+                        ability_name = ability['displayName']
+                        ability_description = ability['description']
+                        ability_image = ability['displayIcon']
+                        abilities.append((ability_name, ability_description, ability_image))
 
                 agents_data.append((name, description, role, agent_image, background_image, abilities))
 
