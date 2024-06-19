@@ -9,13 +9,17 @@
 <body>
 <h1>Agent Details</h1>
 <div class="container">
-    <div class="agent-card" style="background-image: url('{{ agent[0][4] }}');">
-        <img class="agent-image" src="{{ agent[0][3] }}" alt="Image of {{ agent[0][1] }}">
-        <div class="card-content">
-            <h2 class="agent-name">{{ agent[0][1] }}</h2>
-            <p class="agent-role">{{ agent[0][5] }}</p>
+    {% for agent in agent %}
+    <div class="card" style="background-image: url('{{ agent[4] }}');">
+        <img class="agent-image" src="{{ agent[3] }}" alt="Image of {{ agent[1] }}">
+        <div class="agent-card-content">
+            <h2 class="agent-name">{{ agent[1] }}</h2>
+            <h2 class="agent-description">{{ agent[2] }}</h2>
+            <p class="agent-role">{{ agent[5] }}</p>
         </div>
     </div>
+    {% endfor %}
+
     <div class="abilities-container">
         {% for ability in abilities %}
         <div class="ability-card">
