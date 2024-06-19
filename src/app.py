@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 
 import data_manager
 import populate_db
@@ -12,6 +12,7 @@ def agents_route():
     agents = data_manager.get_all_agents()
     if not agents:
         populate_db.save_agents(populate_db.get_agents())
+        return redirect(url_for('agents_route'))
 
     return render_template('agents.html', agents=agents)
 
