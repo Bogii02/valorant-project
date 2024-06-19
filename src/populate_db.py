@@ -46,6 +46,3 @@ def save_agents(agents_data):
 
         except Exception as e:
             print(f"Error saving agent or abilities: {e}")
-
-
-save_agents(get_agents())

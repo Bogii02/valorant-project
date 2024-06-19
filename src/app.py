@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 
 import data_manager
+import populate_db
 
 app = Flask(__name__)
 
@@ -9,6 +10,9 @@ app = Flask(__name__)
 @app.route('/agents', methods=['GET'])
 def agents_route():
     agents = data_manager.get_all_agents()
+    if not agents:
+        populate_db.save_agents(populate_db.get_agents())
+
     return render_template('agents.html', agents=agents)
 
 
