@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 
 import data_manager
 import populate_db
@@ -9,6 +9,16 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/agents', methods=['GET'])
 def agents_route():
+    agent_search = request.args.get('agent-search')
+
+    if agent_search is not None:
+        agent_search = agent_search.capitalize()
+        agent = data_manager.get_agent_by_name(agent_search)
+        if agent:
+            return redirect(url_for('agent_details_route', agent_name=agent_search))
+        else:
+            return render_template('agents.html', agents=[])
+
     agents = data_manager.get_all_agents()
     if not agents:
         populate_db.save_agents(populate_db.get_agents())
