@@ -8,7 +8,7 @@ data = response.json()
 
 
 def encode_agent_name_for_url(agent_name):
-    return agent_name.replace('/', '')
+    return agent_name.replace('/', '').capitalize()
 
 
 def get_agents():
