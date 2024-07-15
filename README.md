@@ -9,6 +9,7 @@
 
 <h3>I created this project for people who want to explore detailed profiles of all agents, showcasing their unique abilities and backgrounds in an interactive format.</h3>
 <h3>Users can look through all the agents and all their abilities with pictures and descriptions. Currently, you can search for agents by their name, later on by role too.</h3>
+
 ### Built With
 
 The following technologies were used during the project:
