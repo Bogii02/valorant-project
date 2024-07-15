@@ -50,6 +50,10 @@ To get started with my Valorant project, follow these steps:
 
 ## Endpoints
 
+- **/agents**: Retrieve all agents.
+
+- **/agents/{agent_name}**: Retrieve an agent with their description and their abilities.
+
 <!-- CONTACT -->
 
 ## Contact
