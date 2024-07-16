@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='header.css') }}">
+    <title></title>
+</head>
+
+<header>
+    <a href="{{ url_for('agents_route') }}" class="nav-link">Agents</a>
+    <a href="{{ url_for('weapons_route') }}" class="nav-link">Weapons</a>
+    <a href="{{ url_for('maps_route') }}" class="nav-link">Maps</a>
+</header>
+</html>

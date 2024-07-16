@@ -70,3 +70,7 @@ body {
         height: auto;
     }
 }
+
+.search-container {
+    margin: 1rem ;
+}

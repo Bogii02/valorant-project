@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='agents.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+{% include 'header.html' %}
 <body>
 <div class="search-container">
     <form action="{{ url_for('agents_route') }}" method="get">
         <label>
-            <input type="text" id="agent-search" name="agent-search" placeholder="Search for agent"
-                   value="{{ request.args.get('agent-search', '') }}">
+            <input type="text" id="agent-search" name="agent-search" placeholder="Search for agent">
         </label>
         <button type="submit">
             <i class="fas fa-search"></i>
