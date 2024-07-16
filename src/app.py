@@ -34,5 +34,15 @@ def agent_details_route(agent_name):
     return render_template('agent_details.html', agent=agent, abilities=abilities)
 
 
+@app.route('/weapons', methods=['GET'])
+def weapons_route():
+    return 'weapons'
+
+
+@app.route('/maps', methods=['GET'])
+def maps_route():
+    return 'maps'
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
