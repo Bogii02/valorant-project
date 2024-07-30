@@ -46,15 +46,6 @@ To get started with my Valorant project, follow these steps:
    ```sh
    docker compose up --build
    ```
-
-<!-- FEATURES -->
-
-## Endpoints
-
-- **/agents**: Retrieve all agents.
-
-- **/agents/{agent_name}**: Retrieve an agent with their description and their abilities.
-
 <!-- CONTACT -->
 
 ## Contact
