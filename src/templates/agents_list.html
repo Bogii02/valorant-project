@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agents by role</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='agents.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+{% include 'header.html' %}
+<div class="container">
+    {% if agents %}
+    {% for agent in agents %}
+    <a href="{{ url_for('agent_details_route', agent_name=agent[1]) }}" class="card-link">
+        <div class="card" style="background-image: url('{{ agent[4] }}');">
+            <img class="agent-image" src="{{ agent[3] }}" alt="Image of {{ agent[1] }}">
+            <div class="card-content">
+                <h2 class="card-name">{{ agent[1] }}</h2>
+                <p class="card-role">{{ agent[5] }}</p>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+    {% else %}
+    <p>No agents found.</p>
+    {% endif %}
+</div>
+</body>
