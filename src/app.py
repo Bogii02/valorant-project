@@ -9,13 +9,13 @@ app = Flask(__name__)
 @app.route('/agents', methods=['GET'])
 def agents_route():
     agent_search = request.args.get('agent-search')
+    role_search = request.args.get('role-search')
 
-    if agent_search is not None:
-        agent = data_manager.get_agent_by_name(agent_search.capitalize())
-        if agent:
-            return redirect(url_for('agent_details_route', agent_name=agent_search))
-        else:
-            return render_template('agents.html', agents=[], query=agent_search)
+    if agent_search:
+        return redirect(url_for('agent_details_route', agent_name=agent_search))
+
+    if role_search:
+        return redirect(url_for('agents_by_role_route', role=role_search))
 
     agents = data_manager.get_all_agents()
     if not agents:
@@ -30,6 +30,14 @@ def agent_details_route(agent_name):
     agent = data_manager.get_agent_by_name(agent_name)
     abilities = data_manager.get_abilities_by_agent(agent_name)
     return render_template('agent_details.html', agent=agent, abilities=abilities)
+
+
+@app.route('/agents/role/<role>', methods=['GET'])
+def agents_by_role_route(role):
+    agents = data_manager.get_agents_by_role(role.capitalize())
+    if not agents:
+        return render_template('agents_list.html', agents=[], message=f"No agents found for the role '{role}'")
+    return render_template('agents_list.html', agents=agents)
 
 
 @app.route('/weapons', methods=['GET'])

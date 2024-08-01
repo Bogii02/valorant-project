@@ -8,14 +8,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css">
+    <link rel="stylesheet"
+          href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css">
 </head>
 <body>
 {% include 'header.html' %}
+<div class="role-buttons">
+    <button onclick="location.href='/agents/role/duelist'">Duelists</button>
+    <button onclick="location.href='/agents/role/controller'">Controllers</button>
+    <button onclick="location.href='/agents/role/initiator'">Initiators</button>
+    <button onclick="location.href='/agents/role/sentinel'">Sentinels</button>
+</div>
+
+
 <div class="search-container">
     <form action="{{ url_for('agents_route') }}" method="get">
         <label>
-            <input type="text" id="agent-search" name="agent-search" placeholder="Search for agent" value="{{ query if query else '' }}">
+            <input type="text" id="agent-search" name="agent-search" placeholder="Search for agent"
+                   value="{{ query if query else '' }}">
         </label>
         <button type="submit">
             <i class="fas fa-search"></i>
@@ -41,15 +51,15 @@
 </div>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#agent-search').autocomplete({
-            source: function(request, response) {
+            source: function (request, response) {
                 $.ajax({
                     url: "/search",
                     data: {
                         q: request.term
                     },
-                    success: function(data) {
+                    success: function (data) {
                         response(data);
                     }
                 });

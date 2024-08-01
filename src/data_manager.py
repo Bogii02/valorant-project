@@ -64,3 +64,15 @@ def get_abilities_by_agent(cursor, agent_name):
         'agent_name': agent_name
     })
     return cursor.fetchall()
+
+
+@connection_handler
+def get_agents_by_role(cursor, role):
+    query = """
+        SELECT * FROM agent
+        WHERE role = %(role)s
+        """
+    cursor.execute(query, {
+        'role': role
+    })
+    return cursor.fetchall()
