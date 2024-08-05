@@ -9,9 +9,25 @@ CREATE TABLE IF NOT EXISTS agent (
 
 CREATE TABLE IF NOT EXISTS ability (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(50),
+    name VARCHAR(30),
     description VARCHAR(500),
     image VARCHAR(255),
     agent_name VARCHAR(20),
-    FOREIGN KEY (agent_name) REFERENCES agent(name)
+    FOREIGN KEY (agent_name) REFERENCES agent(name) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS weapon (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50),
+    image VARCHAR(128),
+    empty_image VARCHAR(128),
+    category VARCHAR(50)
+);
+
+CREATE TABLE IF NOT EXISTS skin (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50),
+    image VARCHAR(255),
+    weapon_id INT,
+    FOREIGN KEY (weapon_id) REFERENCES weapon(id) ON DELETE CASCADE
 );
