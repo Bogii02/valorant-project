@@ -69,9 +69,14 @@ def get_weapons():
 
             skins = []
             for skin in weapon['skins']:
-                skin_name = skin['displayName']
-                skin_image = skin['displayIcon']
-                skins.append((skin_name, skin_image))
+                if skin['displayName'] != "Random Favorite Skin" and "Standard" not in skin['displayName']:
+                    skin_name = skin['displayName']
+                    if skin['displayIcon'] is None:
+                        skin_image = empty_image
+                    else:
+                        skin_image = skin['displayIcon']
+
+                    skins.append((skin_name, skin_image))
 
             weapons_data.append((name, image, category, empty_image, skins))
 
@@ -84,11 +89,11 @@ def save_weapons(weapons_data):
     for weapon_data in weapons_data:
         name, image, category, empty_image, skins = weapon_data
         try:
-            weapon_id = data_manager.save_weapon(name, image, category, empty_image)
+            weapon_name = data_manager.save_weapon(name, image, category, empty_image)
 
             for skin in skins:
                 skin_name, skin_image = skin
-                data_manager.save_skin(skin_name, skin_image, weapon_id)
+                data_manager.save_skin(skin_name, skin_image, weapon_name)
 
         except Exception as e:
             print(f"Error saving weapon or skins: {e}")

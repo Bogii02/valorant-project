@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weapon skins</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='weapon_skins.css') }}">
+</head>
+{% include 'header.html' %}
+<body>
+<div class="skins-container">
+    {% for skin in skins %}
+    <div class="card">
+        <img class="skin-image" src="{{ skin[2] }}" alt="Image of {{ skin[1] }}">
+        <h2 class="skin-name">{{ skin[1] }}</h2>
+    </div>
+    {% endfor %}
+</div>
+</body>
+</html>

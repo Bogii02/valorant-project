@@ -37,7 +37,7 @@ def save_weapon(cursor, name, image, category, empty_image):
     query = """
         INSERT INTO weapon(name, image, category, empty_image)
         VALUES (%(name)s, %(image)s, %(category)s, %(empty_image)s)
-        RETURNING id;
+        RETURNING name;
         """
     cursor.execute(query, {
         'name': name,
@@ -49,16 +49,46 @@ def save_weapon(cursor, name, image, category, empty_image):
 
 
 @connection_handler
-def save_skin(cursor, name, image, weapon_id):
+def save_skin(cursor, name, image, weapon_name):
     query = """
-        INSERT INTO skin(name, image, weapon_id)
-        VALUES (%(name)s, %(image)s, %(weapon_id)s)
+        INSERT INTO skin(name, image, weapon_name)
+        VALUES (%(name)s, %(image)s, %(weapon_name)s);
         """
     cursor.execute(query, {
         'name': name,
         'image': image,
-        'weapon_id': weapon_id
+        'weapon_name': weapon_name
     })
+
+
+@connection_handler
+def get_all_weapons(cursor):
+    query = """
+        SELECT * FROM weapon;
+    """
+    cursor.execute(query)
+    return cursor.fetchall()
+
+
+@connection_handler
+def get_all_skins(cursor):
+    query = """
+        SELECT * FROM skin;
+    """
+    cursor.execute(query)
+    return cursor.fetchall()
+
+
+@connection_handler
+def get_skins_by_weapon(cursor, weapon_name):
+    query = """
+        SELECT * FROM skin
+        WHERE weapon_name = %(weapon_name)s;
+    """
+    cursor.execute(query, {
+        'weapon_name': weapon_name
+    })
+    return cursor.fetchall()
 
 
 @connection_handler

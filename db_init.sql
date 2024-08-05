@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS ability (
 
 CREATE TABLE IF NOT EXISTS weapon (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(50),
+    name VARCHAR(50) NOT NULL UNIQUE ,
     image VARCHAR(128),
     empty_image VARCHAR(128),
     category VARCHAR(50)
@@ -28,6 +28,6 @@ CREATE TABLE IF NOT EXISTS skin (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50),
     image VARCHAR(255),
-    weapon_id INT,
-    FOREIGN KEY (weapon_id) REFERENCES weapon(id) ON DELETE CASCADE
+    weapon_name VARCHAR(50),
+    FOREIGN KEY (weapon_name) REFERENCES weapon(name) ON DELETE CASCADE
 );
