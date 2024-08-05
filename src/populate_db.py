@@ -59,7 +59,12 @@ def get_weapons():
         try:
             name = weapon['displayName']
             image = weapon['displayIcon']
-            category = weapon['shopData']['category']
+
+            shop_data = weapon.get('shopData')
+            if shop_data is None:
+                category = 'Melee'
+            else:
+                category = shop_data.get('category')
 
             weapons_data.append((name, image, category))
 
@@ -72,7 +77,7 @@ def save_weapons(weapons_data):
     for weapon_data in weapons_data:
         name, image, category = weapon_data
         try:
-            data_manager.save_weapon(name, image, category)
+            weapon_id = data_manager.save_weapon(name, image, category)
 
         except Exception as e:
             print(f"Error saving weapon or skins: {e}")
