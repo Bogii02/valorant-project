@@ -45,6 +45,7 @@ def weapons_route():
     weapons = data_manager.get_all_weapons()
     if not weapons:
         populate_db.save_weapons(populate_db.get_weapons())
+        return redirect(url_for('weapons_route'))
     return render_template('weapons.html', weapons=weapons)
 
 
