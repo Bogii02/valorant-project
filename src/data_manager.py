@@ -62,6 +62,36 @@ def save_skin(cursor, name, image, weapon_name):
 
 
 @connection_handler
+def get_all_weapons(cursor):
+    query = """
+        SELECT * FROM weapon;
+    """
+    cursor.execute(query)
+    return cursor.fetchall()
+
+
+@connection_handler
+def get_all_skins(cursor):
+    query = """
+        SELECT * FROM skin;
+    """
+    cursor.execute(query)
+    return cursor.fetchall()
+
+
+@connection_handler
+def get_skins_by_weapon(cursor, weapon_name):
+    query = """
+        SELECT * FROM skin
+        WHERE weapon_name = %(weapon_name)s;
+    """
+    cursor.execute(query, {
+        'weapon_name': weapon_name
+    })
+    return cursor.fetchall()
+
+
+@connection_handler
 def get_all_agents(cursor):
     query = """ 
         SELECT * FROM agent

@@ -42,7 +42,16 @@ def agents_by_role_route(role):
 
 @app.route('/weapons', methods=['GET'])
 def weapons_route():
-    return 'weapons'
+    weapons = data_manager.get_all_weapons()
+    if not weapons:
+        populate_db.save_weapons(populate_db.get_weapons())
+    return render_template('weapons.html', weapons=weapons)
+
+
+@app.route('/weapon/skins/<weapon_name>', methods=['GET'])
+def weapon_skins_route(weapon_name):
+    skins = data_manager.get_skins_by_weapon(weapon_name)
+    return render_template('weapon_skins.html', skins=skins)
 
 
 @app.route('/maps', methods=['GET'])
