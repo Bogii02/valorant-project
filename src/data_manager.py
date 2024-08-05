@@ -33,16 +33,17 @@ def save_ability(cursor, name, description, image, agent_name):
 
 
 @connection_handler
-def save_weapon(cursor, name, image, category):
+def save_weapon(cursor, name, image, category, empty_image):
     query = """
-        INSERT INTO weapon(name, image, category)
-        VALUES (%(name)s, %(image)s, %(category)s)
+        INSERT INTO weapon(name, image, category, empty_image)
+        VALUES (%(name)s, %(image)s, %(category)s, %(empty_image)s)
         RETURNING id;
         """
     cursor.execute(query, {
         'name': name,
         'image': image,
-        'category': category
+        'category': category,
+        'empty_image': empty_image
     })
     return cursor.fetchone()[0]
 
