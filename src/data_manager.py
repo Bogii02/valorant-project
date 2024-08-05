@@ -33,6 +33,34 @@ def save_ability(cursor, name, description, image, agent_name):
 
 
 @connection_handler
+def save_weapon(cursor, name, image, category):
+    query = """
+        INSERT INTO weapon(name, image, category)
+        VALUES (%(name)s, %(image)s, %(category)s)
+        RETURNING id;
+        """
+    cursor.execute(query, {
+        'name': name,
+        'image': image,
+        'category': category
+    })
+    return cursor.fetchone()[0]
+
+
+@connection_handler
+def save_skin(cursor, name, image, weapon_id):
+    query = """
+        INSERT INTO skin(name, image, weapon_id)
+        VALUES (%(name)s, %(image)s, %(weapon_id)s)
+        """
+    cursor.execute(query, {
+        'name': name,
+        'image': image,
+        'weapon_id': weapon_id
+    })
+
+
+@connection_handler
 def get_all_agents(cursor):
     query = """ 
         SELECT * FROM agent

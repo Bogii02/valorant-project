@@ -1,10 +1,11 @@
 import requests
 import data_manager
 
-AGENT_URL = "https://valorant-api.com/v1/agents"
+AGENTS_URL = "https://valorant-api.com/v1/agents"
+WEAPONS_URL = "https://valorant-api.com/v1/weapons"
 
-response = requests.get(AGENT_URL)
-data = response.json()
+agents = requests.get(AGENTS_URL).json()
+weapons = requests.get(WEAPONS_URL).json()
 
 
 def encode_agent_name_for_url(agent_name):
@@ -13,7 +14,7 @@ def encode_agent_name_for_url(agent_name):
 
 def get_agents():
     agents_data = []
-    for agent in data['data']:
+    for agent in agents['data']:
         try:
             if agent['isPlayableCharacter']:
                 name = agent['displayName']
@@ -50,3 +51,31 @@ def save_agents(agents_data):
 
         except Exception as e:
             print(f"Error saving agent or abilities: {e}")
+
+
+def get_weapons():
+    weapons_data = []
+    for weapon in weapons['data']:
+        try:
+            name = weapon['displayName']
+            image = weapon['displayIcon']
+            category = weapon['shopData']['category']
+
+            weapons_data.append((name, image, category))
+
+        except Exception as e:
+            print(f"Error processing weapon: {e}")
+    return weapons_data
+
+
+def save_weapons(weapons_data):
+    for weapon_data in weapons_data:
+        name, image, category = weapon_data
+        try:
+            data_manager.save_weapon(name, image, category)
+
+        except Exception as e:
+            print(f"Error saving weapon or skins: {e}")
+
+
+save_weapons(get_weapons())
