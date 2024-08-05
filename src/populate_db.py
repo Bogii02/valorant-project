@@ -69,9 +69,14 @@ def get_weapons():
 
             skins = []
             for skin in weapon['skins']:
-                skin_name = skin['displayName']
-                skin_image = skin['displayIcon']
-                skins.append((skin_name, skin_image))
+                if skin['displayName'] != "Random Favorite Skin" and "Standard" not in skin['displayName']:
+                    skin_name = skin['displayName']
+                    if skin['displayIcon'] is None:
+                        skin_image = empty_image
+                    else:
+                        skin_image = skin['displayIcon']
+
+                    skins.append((skin_name, skin_image))
 
             weapons_data.append((name, image, category, empty_image, skins))
 
