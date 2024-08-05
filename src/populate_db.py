@@ -34,7 +34,7 @@ def get_agents():
                 agents_data.append((name, description, role, agent_image, background_image, abilities))
 
         except Exception as e:
-            print(f"Error processing agent: {e}")
+            print(f"Error processing agent or ability: {e}")
     return agents_data
 
 
@@ -45,8 +45,8 @@ def save_agents(agents_data):
             name = encode_agent_name_for_url(name)
             agent_name = data_manager.save_agent(name, description, agent_image, background_image, role)
 
-            for ability_data in abilities:
-                ability_name, ability_description, ability_image = ability_data
+            for ability in abilities:
+                ability_name, ability_description, ability_image = ability
                 data_manager.save_ability(ability_name, ability_description, ability_image, agent_name)
 
         except Exception as e:
@@ -59,6 +59,7 @@ def get_weapons():
         try:
             name = weapon['displayName']
             image = weapon['displayIcon']
+            empty_image = weapon['killStreamIcon']
 
             shop_data = weapon.get('shopData')
             if shop_data is None:
@@ -66,21 +67,28 @@ def get_weapons():
             else:
                 category = shop_data.get('category')
 
-            weapons_data.append((name, image, category))
+            skins = []
+            for skin in weapon['skins']:
+                skin_name = skin['displayName']
+                skin_image = skin['displayIcon']
+                skins.append((skin_name, skin_image))
+
+            weapons_data.append((name, image, category, empty_image, skins))
 
         except Exception as e:
-            print(f"Error processing weapon: {e}")
+            print(f"Error processing weapon or skin: {e}")
     return weapons_data
 
 
 def save_weapons(weapons_data):
     for weapon_data in weapons_data:
-        name, image, category = weapon_data
+        name, image, category, empty_image, skins = weapon_data
         try:
-            weapon_id = data_manager.save_weapon(name, image, category)
+            weapon_id = data_manager.save_weapon(name, image, category, empty_image)
+
+            for skin in skins:
+                skin_name, skin_image = skin
+                data_manager.save_skin(skin_name, skin_image, weapon_id)
 
         except Exception as e:
             print(f"Error saving weapon or skins: {e}")
-
-
-save_weapons(get_weapons())
