@@ -84,11 +84,11 @@ def save_weapons(weapons_data):
     for weapon_data in weapons_data:
         name, image, category, empty_image, skins = weapon_data
         try:
-            weapon_id = data_manager.save_weapon(name, image, category, empty_image)
+            weapon_name = data_manager.save_weapon(name, image, category, empty_image)
 
             for skin in skins:
                 skin_name, skin_image = skin
-                data_manager.save_skin(skin_name, skin_image, weapon_id)
+                data_manager.save_skin(skin_name, skin_image, weapon_name)
 
         except Exception as e:
             print(f"Error saving weapon or skins: {e}")
