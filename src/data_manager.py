@@ -147,3 +147,12 @@ def get_skins_by_weapon(cursor, weapon_name):
         'weapon_name': weapon_name
     })
     return cursor.fetchall()
+
+
+@connection_handler
+def get_all_maps(cursor):
+    query = """
+        SELECT * FROM map;
+    """
+    cursor.execute(query)
+    return cursor.fetchall()
