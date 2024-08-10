@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maps</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='maps.css') }}">
+</head>
+{% include 'header.html' %}
+<body>
+<div class="maps-container">
+    {% for map in maps %}
+    <div class="card">
+        <img class="map-iamge" src="{{ map[2] }}" alt="Image of {{ map[1] }}">
+        <h2 class="map-name">{{ map[1] }}</h2>
+    </div>
+    {% endfor %}
+</div>
+</body>
+</html>
