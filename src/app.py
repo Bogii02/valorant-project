@@ -57,7 +57,8 @@ def weapon_skins_route(weapon_name):
 
 @app.route('/maps', methods=['GET'])
 def maps_route():
-    return 'maps'
+    maps = data_manager.get_all_maps()
+    return render_template('maps.html', maps=maps)
 
 
 @app.route('/search')

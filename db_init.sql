@@ -31,3 +31,9 @@ CREATE TABLE IF NOT EXISTS skin (
     weapon_name VARCHAR(50),
     FOREIGN KEY (weapon_name) REFERENCES weapon(name) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS map (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50),
+    image VARCHAR(128)
+);

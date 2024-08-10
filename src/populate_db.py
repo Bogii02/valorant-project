@@ -3,9 +3,7 @@ import data_manager
 
 AGENTS_URL = "https://valorant-api.com/v1/agents"
 WEAPONS_URL = "https://valorant-api.com/v1/weapons"
-
-agents = requests.get(AGENTS_URL).json()
-weapons = requests.get(WEAPONS_URL).json()
+MAPS_URL = "https://valorant-api.com/v1/maps"
 
 
 def encode_agent_name_for_url(agent_name):
@@ -13,6 +11,7 @@ def encode_agent_name_for_url(agent_name):
 
 
 def get_agents():
+    agents = requests.get(AGENTS_URL).json()
     agents_data = []
     for agent in agents['data']:
         try:
@@ -50,10 +49,11 @@ def save_agents(agents_data):
                 data_manager.save_ability(ability_name, ability_description, ability_image, agent_name)
 
         except Exception as e:
-            print(f"Error saving agent or abilities: {e}")
+            print(f"Error saving agent or ability: {e}")
 
 
 def get_weapons():
+    weapons = requests.get(WEAPONS_URL).json()
     weapons_data = []
     for weapon in weapons['data']:
         try:
@@ -96,4 +96,29 @@ def save_weapons(weapons_data):
                 data_manager.save_skin(skin_name, skin_image, weapon_name)
 
         except Exception as e:
-            print(f"Error saving weapon or skins: {e}")
+            print(f"Error saving weapon or skin: {e}")
+
+
+def get_maps():
+    maps = requests.get(MAPS_URL).json()
+    maps_data = []
+    for map in maps['data']:
+        try:
+            name = map['displayName'],
+            image = map['splash']
+
+            maps_data.append((name, image))
+
+        except Exception as e:
+            print(f"Error processing map: {e}")
+    return maps_data
+
+
+def save_maps(maps_data):
+    for map_data in maps_data:
+        name, image = map_data
+        try:
+            data_manager.save_map(name, image)
+
+        except Exception as e:
+            print(f"Error saving map: {e}")
