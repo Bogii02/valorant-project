@@ -58,6 +58,10 @@ def weapon_skins_route(weapon_name):
 @app.route('/maps', methods=['GET'])
 def maps_route():
     maps = data_manager.get_all_maps()
+
+    if not maps:
+        populate_db.save_maps(populate_db.get_maps())
+        return redirect(url_for('maps_route'))
     return render_template('maps.html', maps=maps)
 
 
