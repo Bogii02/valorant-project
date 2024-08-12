@@ -115,10 +115,14 @@ def get_maps():
 
 
 def save_maps(maps_data):
+    saved_maps = set()
+
     for map_data in maps_data:
         name, image = map_data
-        try:
-            data_manager.save_map(name, image)
+        if name not in saved_maps:
+            try:
+                data_manager.save_map(name, image)
+                saved_maps.add(name)
 
-        except Exception as e:
-            print(f"Error saving map: {e}")
+            except Exception as e:
+                print(f"Error saving map: {e}")
